@@ -101,22 +101,43 @@ body {
 }
 
 
+/* Style for the start button */
+
+.start-btn {
+    display: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    border: none;
+    background-color: #FEF2BF;
+    color: #011F3F;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
 /* Media query for phones */
 
 @media (max-width: 600px) {
     #level-title {
         font-size: 2rem;
+        margin-bottom: 5rem;
     }
     .container {
         width: 100%;
     }
     .btn {
-        height: 10rem;
-        width: 10rem;
-        line-height: 10rem;
-        font-size: 2rem;
+        height: 5rem;
+        width: 5rem;
+        line-height: 5rem;
+        font-size: 1rem;
     }
     .scoreBoard {
+        margin-top: 5rem;
         font-size: 16px;
+    }
+    .start-btn {
+        display: inline-block;
     }
 }
