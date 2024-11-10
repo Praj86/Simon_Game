@@ -1,44 +1,60 @@
+/* Style for the body */
+
 body {
     text-align: center;
     background-color: #011F3F;
 }
 
+
+/* Style for the level title */
+
 #level-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 3rem;
-    margin: 5%;
     color: #FEF2BF;
     margin: 2% 2%;
 }
 
+
+/* Container to hold the buttons */
+
 .container {
     display: inline-block;
-    width: 50%;
-    margin: 0 auto 0 auto;
+    width: 80%;
+    margin: 0 auto;
 }
 
+
+/* General style for the buttons */
+
 .btn {
-    justify-content: center;
-    text-align: center;
     display: inline-block;
     height: 18rem;
     width: 18rem;
-    border: 10px solid black;
+    border: 20px solid rgb(13, 12, 12);
     border-radius: 5%;
-    align-items: center;
     line-height: 20rem;
     font-size: 4rem;
     font-family: 'Press Start 2P', cursive;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
 .btn:hover {
     cursor: pointer;
 }
 
+
+/* Style for game over screen */
+
 .gameOver {
     background-color: red;
     opacity: 0.8;
 }
+
+
+/* Styles for the individual buttons with specific colors and rounded corners */
 
 .red {
     background-color: red;
@@ -64,10 +80,16 @@ body {
     margin: 0.5%;
 }
 
+
+/* Style for pressed state */
+
 .pressed {
     box-shadow: 0 0 20px white;
     background-color: grey;
 }
+
+
+/* Style for the scoreboard */
 
 .scoreBoard {
     display: flex;
@@ -76,4 +98,25 @@ body {
     font-family: 'Press Start 2P', cursive;
     font-size: 20px;
     font-weight: bold;
+}
+
+
+/* Media query for phones */
+
+@media (max-width: 600px) {
+    #level-title {
+        font-size: 2rem;
+    }
+    .container {
+        width: 100%;
+    }
+    .btn {
+        height: 10rem;
+        width: 10rem;
+        line-height: 10rem;
+        font-size: 2rem;
+    }
+    .scoreBoard {
+        font-size: 16px;
+    }
 }
