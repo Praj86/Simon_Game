@@ -1,5 +1,4 @@
 
-```markdown
 # Simon Game
 
 Welcome to the **Simon Game**! This web application is an interactive game where users have to remember and reproduce a sequence of colors and sounds. The game gets progressively harder as the sequence lengthens, challenging your memory and reflexes.
