@@ -47,9 +47,14 @@ function nextSequence() {
     var randomChosenColor = buttonColours[randomizer];
     gamePattern.push(randomChosenColor);
     for (var i = 0; i < gamePattern.length; i++) {
-        $("#" + gamePattern[i]).fadeOut(100).fadeIn(100);
-        playAudio(gamePattern[i]);
+        (function(index) {
+            setTimeout(function() {
+                $("#" + gamePattern[index]).fadeIn(100).fadeOut(100).fadeIn(100);
+                playAudio(gamePattern[index]);
+            }, 500 * index); // Delay of 500ms between each element
+        })(i);
     }
+
 
 
 
