@@ -14,17 +14,25 @@ var highestScore = 0;
 // Event listener for keydown events to start the game or handle keypresses
 $(document).on('keydown', function(event) {
     if (event.key === "Control" && !started) {
-        playAudio("gameStart");
-        setTimeout(function() {
-            $('#currentScore').text(`Current Score: ${currentScore}`);
-            $("h1").text("Level " + level);
-            nextSequence();
-        }, 700);
-        started = true;
+        startGame();
     } else if (["j", "d", "k", "f"].includes(event.key)) {
         handleKeyPress(event.key);
     }
 });
+
+// Event listener for the start button for mobile devices
+$('#start-btn').on('click', function() {
+    startGame();
+});
+
+// Function to start the game
+function startGame() {
+    playAudio("gameStart");
+    $('#currentScore').text(`Current Score: ${currentScore}`);
+    $("h1").text("Level " + level);
+    nextSequence();
+    started = true;
+}
 
 // Function to handle key presses and map keys to colors
 function handleKeyPress(key) {
