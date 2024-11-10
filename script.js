@@ -1,37 +1,32 @@
-//Creating Array for Colors
+// Creating an array for button colors
 var buttonColours = ["green", "red", "blue", "yellow"];
-//creating Array for user choices
+
+// Creating arrays to store user choices and the game pattern
 var userClickedPattern = [];
 var gamePattern = [];
 
+// Game state variables
 var started = false;
 var level = 0;
 var currentScore = 0;
 var highestScore = 0;
 
-//console.log(gamePattern);
-
-//Choosing Buttons with ranomChosenColor 
-// 
+// Event listener for keydown events to start the game or handle keypresses
 $(document).on('keydown', function(event) {
     if (event.key === "Control" && !started) {
         playAudio("gameStart");
-        $('#currentScore').text(`Current Score: ${currentScore}`);
-        $("h1").text("Level " + level);
-        nextSequence();
-
-        started = true;
-    }
-});
-$(document).on('keydown', function(event) {
-    if (event.key === "Control" && !started) {
-        nextSequence();
+        setTimeout(function() {
+            $('#currentScore').text(`Current Score: ${currentScore}`);
+            $("h1").text("Level " + level);
+            nextSequence();
+        }, 700);
         started = true;
     } else if (["j", "d", "k", "f"].includes(event.key)) {
         handleKeyPress(event.key);
     }
 });
 
+// Function to handle key presses and map keys to colors
 function handleKeyPress(key) {
     var keyToColor = {
         "j": "red",
@@ -48,10 +43,8 @@ function handleKeyPress(key) {
     checkAnswer(userClickedPattern.length - 1);
 }
 
-
-//Handling both button click and keypress events
+// Event listener for button clicks
 $('.btn').on('click', function() {
-
     var userChosenColor = this.id;
     userClickedPattern.push(userChosenColor);
 
@@ -60,7 +53,7 @@ $('.btn').on('click', function() {
     checkAnswer(userClickedPattern.length - 1);
 });
 
-
+// Function to generate the next sequence in the game pattern
 function nextSequence() {
     userClickedPattern = [];
 
@@ -71,6 +64,8 @@ function nextSequence() {
     var randomizer = Math.floor(Math.random() * 4);
     var randomChosenColor = buttonColours[randomizer];
     gamePattern.push(randomChosenColor);
+
+    // Play the sequence with a delay between each element
     for (var i = 0; i < gamePattern.length; i++) {
         (function(index) {
             setTimeout(function() {
@@ -79,11 +74,9 @@ function nextSequence() {
             }, 500 * index); // Delay of 500ms between each element
         })(i);
     }
-
 }
 
-
-
+// Function to check the user's answer against the game pattern
 function checkAnswer(currentLevel) {
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
         $('#currentScore').text(`Current Score: ${currentScore}`);
@@ -108,29 +101,23 @@ function checkAnswer(currentLevel) {
     }
 }
 
-
+// Function to reset the game variables and restart the game
 function startOver() {
-
     level = 0;
     gamePattern = [];
     started = false;
     currentScore = 0;
 }
 
-//randomizer function rand between 0 and 3
-
-
-
+// Function to animate button presses
 function animatePress(currentColor) {
     $("#" + currentColor).fadeOut(100).fadeIn(100);
     setTimeout(function() {
         $("#" + currentColor).removeClass("pressed");
     }, 100);
-
 }
 
-
-//function to Play Audio with Switch statements
+// Function to play audio based on the color or event
 function playAudio(name) {
     var audio = new Audio("sounds/" + name + ".mp3");
     audio.play();
