@@ -16,8 +16,8 @@ $(document).on('keydown', function(event) {
     if (event.key === "Control" && !started) {
         playAudio("gameStart");
         setTimeout(function() {
-            // $('#currentScore').text(`Current Score: ${currentScore}`);
-            // $("h1").text("Level " + level);
+            $('#currentScore').text(`Current Score: ${currentScore}`);
+            $("h1").text("Level " + level);
             nextSequence();
         }, 700);
         started = true;
