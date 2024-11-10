@@ -6,25 +6,48 @@ var gamePattern = [];
 
 var started = false;
 var level = 0;
+var currentScore = 0;
+var highestScore = 0;
 
 //console.log(gamePattern);
 
 //Choosing Buttons with ranomChosenColor 
 // 
-$(document).keydown(function() {
-    if (!started) {
-        // $("h1").text("Level " + level);
+$(document).on('keydown', function(event) {
+    if (event.key === "Control" && !started) {
+        playAudio("gameStart");
+        $('#currentScore').text(`Current Score: ${currentScore}`);
+        $("h1").text("Level " + level);
         nextSequence();
+
         started = true;
     }
-    // while (!started)
-    //     if (event.key === "control") {
-    //         nextSequence();
-    //         started = true;
-    //     }
-    // } else if (event.key === "alt") {
-    // }
 });
+$(document).on('keydown', function(event) {
+    if (event.key === "Control" && !started) {
+        nextSequence();
+        started = true;
+    } else if (["j", "d", "k", "f"].includes(event.key)) {
+        handleKeyPress(event.key);
+    }
+});
+
+function handleKeyPress(key) {
+    var keyToColor = {
+        "j": "red",
+        "f": "yellow",
+        "k": "blue",
+        "d": "green"
+    };
+
+    var userChosenColor = keyToColor[key];
+    userClickedPattern.push(userChosenColor);
+
+    animatePress(userChosenColor);
+    playAudio(userChosenColor);
+    checkAnswer(userClickedPattern.length - 1);
+}
+
 
 //Handling both button click and keypress events
 $('.btn').on('click', function() {
@@ -41,41 +64,42 @@ $('.btn').on('click', function() {
 function nextSequence() {
     userClickedPattern = [];
 
-    level = +1;
+    level++;
+    currentScore = (level * 10);
     $('h1').text(`Level ${level}`);
+
     var randomizer = Math.floor(Math.random() * 4);
     var randomChosenColor = buttonColours[randomizer];
     gamePattern.push(randomChosenColor);
     for (var i = 0; i < gamePattern.length; i++) {
         (function(index) {
             setTimeout(function() {
-                $("#" + gamePattern[index]).fadeIn(100).fadeOut(100).fadeIn(100);
+                $("#" + gamePattern[index]).fadeOut(100).fadeIn(100);
                 playAudio(gamePattern[index]);
             }, 500 * index); // Delay of 500ms between each element
         })(i);
     }
 
-
-
-
 }
 
-//click event handler
-
-// 
 
 
 function checkAnswer(currentLevel) {
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+        $('#currentScore').text(`Current Score: ${currentScore}`);
         if (userClickedPattern.length === gamePattern.length) {
             setTimeout(function() {
                 nextSequence();
             }, 1000);
         }
     } else {
+        if (highestScore < currentScore) {
+            highestScore = currentScore;
+        }
+        $('#highestScore').text('Highest Score: ' + highestScore);
         playAudio("wrong");
         $("body").addClass("gameOver");
-        $("h1").text("Game Over, Press Alt to restart");
+        $("h1").text("Game Over, Press Ctrl to restart");
         setTimeout(function() {
             $("body").removeClass("gameOver");
         }, 300);
@@ -86,9 +110,11 @@ function checkAnswer(currentLevel) {
 
 
 function startOver() {
+
     level = 0;
     gamePattern = [];
     started = false;
+    currentScore = 0;
 }
 
 //randomizer function rand between 0 and 3
