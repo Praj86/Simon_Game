@@ -14,25 +14,30 @@ var highestScore = 0;
 // Event listener for keydown events to start the game or handle keypresses
 $(document).on('keydown', function(event) {
     if (event.key === "Control" && !started) {
-        startGame();
+        playAudio("gameStart");
+        setTimeout(function() {
+            // $('#currentScore').text(`Current Score: ${currentScore}`);
+            // $("h1").text("Level " + level);
+            nextSequence();
+        }, 700);
+        started = true;
     } else if (["j", "d", "k", "f"].includes(event.key)) {
         handleKeyPress(event.key);
     }
 });
 
-// Event listener for the start button for mobile devices
-$('#start-btn').on('click', function() {
-    startGame();
+$('#start-btn').on('click', function(event) {
+    if (!started) {
+        playAudio("gameStart");
+        setTimeout(function() {
+            $('#currentScore').text(`Current Score: ${currentScore}`);
+            $("h1").text("Level " + level);
+            nextSequence();
+        }, 700);
+        started = true;
+    }
 });
 
-// Function to start the game
-function startGame() {
-    playAudio("gameStart");
-    $('#currentScore').text(`Current Score: ${currentScore}`);
-    $("h1").text("Level " + level);
-    nextSequence();
-    started = true;
-}
 
 // Function to handle key presses and map keys to colors
 function handleKeyPress(key) {
@@ -65,8 +70,8 @@ $('.btn').on('click', function() {
 function nextSequence() {
     userClickedPattern = [];
 
-    level++;
-    currentScore = (level * 10);
+    level = level + 1;
+    currentScore = level * 10;
     $('h1').text(`Level ${level}`);
 
     var randomizer = Math.floor(Math.random() * 4);
@@ -87,20 +92,23 @@ function nextSequence() {
 // Function to check the user's answer against the game pattern
 function checkAnswer(currentLevel) {
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
-        $('#currentScore').text(`Current Score: ${currentScore}`);
+
         if (userClickedPattern.length === gamePattern.length) {
+            $('#currentScore').text(`Current Score: ${currentScore}`);
+
             setTimeout(function() {
                 nextSequence();
             }, 1000);
         }
     } else {
         if (highestScore < currentScore) {
-            highestScore = currentScore;
+            highestScore = currentScore - 10;
         }
         $('#highestScore').text('Highest Score: ' + highestScore);
         playAudio("wrong");
         $("body").addClass("gameOver");
         $("h1").text("Game Over, Press Ctrl to restart");
+        $(".start-btn").text("Press to Restart");
         setTimeout(function() {
             $("body").removeClass("gameOver");
         }, 300);
