@@ -10,6 +10,7 @@ var started = false;
 var level = 0;
 var currentScore = 0;
 var highestScore = 0;
+var difficultyIncrease = 500;
 
 // Event listener for keydown events to start the game or handle keypresses
 $(document).on('keydown', function(event) {
@@ -37,7 +38,9 @@ $('#start-btn').on('click', function(event) {
         started = true;
     }
 });
-
+$(document).ready(function() {
+    $('#difficulty-toggle').addClass('easy').text('Easy');
+});
 
 // Function to handle key presses and map keys to colors
 function handleKeyPress(key) {
@@ -77,14 +80,17 @@ function nextSequence() {
     var randomizer = Math.floor(Math.random() * 4);
     var randomChosenColor = buttonColours[randomizer];
     gamePattern.push(randomChosenColor);
-
+    //this if the statement to increase difficulty
+    if ($('#difficulty-toggle').hasClass('hard') && level % 2 === 0) {
+        if (difficultyIncrease > 50) { difficultyIncrease = difficultyIncrease - 50; }
+    }
     // Play the sequence with a delay between each element
     for (var i = 0; i < gamePattern.length; i++) {
         (function(index) {
             setTimeout(function() {
                 $("#" + gamePattern[index]).fadeOut(100).fadeIn(100);
                 playAudio(gamePattern[index]);
-            }, 500 * index); // Delay of 500ms between each element
+            }, difficultyIncrease * index); // Delay of 500ms between each element
         })(i);
     }
 }
@@ -123,6 +129,7 @@ function startOver() {
     gamePattern = [];
     started = false;
     currentScore = 0;
+    difficultyIncrease = 500;
 }
 
 // Function to animate button presses
@@ -137,4 +144,15 @@ function animatePress(currentColor) {
 function playAudio(name) {
     var audio = new Audio("sounds/" + name + ".mp3");
     audio.play();
+}
+
+//Function to toggle difficulty button 
+function toggleDifficulty() {
+    let button = $('#difficulty-toggle');
+    if (button.hasClass('easy')) {
+        button.removeClass('easy').addClass('hard').text('Hard');
+    } else {
+        button.removeClass('hard').addClass('easy').text('Easy');
+
+    }
 }
