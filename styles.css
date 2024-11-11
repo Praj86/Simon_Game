@@ -96,8 +96,11 @@ body {
     flex-direction: column;
     align-items: flex-start;
     font-family: 'Press Start 2P', cursive;
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: bold;
+    height: 100%;
+    padding: 10px;
+    position: relative;
 }
 
 
@@ -105,10 +108,10 @@ body {
 
 .start-btn {
     display: none;
-    font-family: 'Press Start 2P', cursive;
     font-size: 1.5rem;
     margin-top: 2rem;
     padding: 1rem 2rem;
+    font-family: 'Press Start 2P', cursive;
     border: none;
     background-color: #FEF2BF;
     color: #011F3F;
@@ -117,13 +120,60 @@ body {
 }
 
 
+/* Style for the Difficulty button */
+
+.button-container {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+#difficulty-toggle {
+    font-family: 'Press Start 2P', cursive;
+    padding: 1.5rem 2.5rem;
+    font-size: 2rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 45%;
+    border: 10px solid rgb(13, 12, 12);
+}
+
+#difficulty-toggle.easy {
+    background-color: #4CAF50;
+}
+
+#difficulty-toggle.hard {
+    background-color: #D32F2F;
+}
+
+#difficulty-toggle:hover {
+    transform: scale(1.1);
+}
+
+
 /* Media query for phones */
 
 @media (max-width: 768px),
 (pointer: coarse) {
+    #difficulty-toggle {
+        padding: 1rem 1rem;
+        font-size: 1rem;
+    }
     #level-title {
         font-size: 2rem;
         margin-bottom: 5rem;
+    }
+    button-container {
+        position: absolute;
+        top: 50%;
+        right: 10%;
+        transform: translateY(-50%);
+        z-index: 10;
     }
     .container {
         width: 100%;
@@ -140,5 +190,12 @@ body {
     }
     .start-btn {
         display: inline-block;
+    }
+    .scoreBoard {
+        font-size: 0.6rem;
+        font-weight: bold;
+        height: 100%;
+        padding: 10px;
+        position: relative;
     }
 }
