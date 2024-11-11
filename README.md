@@ -13,6 +13,11 @@ Access the live site here: [Simon Game](https://praj86.github.io/Simon_Game/)
 - **Responsive Design**: Ensures an optimal experience across various screen sizes and devices.
 - **Sound Effects**: Each color button plays a unique sound, enhancing the gameplay experience.
 - **Score Tracking**: Displays current and highest scores to keep track of your progress.
+### Difficulty Toggle Button
+
+- Added a difficulty toggle button to switch between "Easy" and "Hard" modes.
+- Implemented functionality to decrease the difficulty increase when the button is in "Hard" mode.
+- Added CSS styling for the difficulty toggle button for responsiveness.
 
 ## Technologies Used
 
@@ -28,6 +33,13 @@ Access the live site here: [Simon Game](https://praj86.github.io/Simon_Game/)
 3. Follow the sequence of colors and replicate it by pressing the corresponding keys (`w`, `d`, `s`, `a`) or clicking on the colored buttons.
 4. Try to remember and reproduce the increasing sequence of colors.
 5. The game ends if you press the wrong button, and you can restart by pressing the 'Alt' key.
+
+**Starting the Game**:
+   - Press the `Control` key or click the start button to start the game.
+   - Follow the generated sequence by clicking the buttons or pressing the corresponding keys.
+**Toggling Difficulty**:
+   - Click the difficulty toggle button to switch between "Easy" and "Hard" modes.
+   - In "Hard" mode, the difficulty increases more rapidly.
 
 ## Installation and Setup
 
@@ -49,10 +61,29 @@ The HTML file contains the structure of the game, including the score display an
 ### CSS
 
 The CSS file is used to style the game elements, ensuring a visually appealing and responsive design.
+### Responsive Design
+
+- Used CSS media queries to make the difficulty toggle button responsive for different screen sizes and touch devices.
+- Adjusted padding and border styles for smaller screens and devices with coarse pointers.
 
 ### JavaScript
 
 The JavaScript file contains the game logic, including functions for starting the game, handling user inputs, checking the game pattern, and updating scores.
+### JavaScript Enhancements
+
+- **Event Listeners**:
+  - Added event listeners for keydown and button click events to start the game and handle user interactions.
+
+- **Game Pattern**:
+  - Added logic to generate and play the next sequence in the game pattern.
+  - Ensured audio plays correctly for each sequence.
+
+- **Check Answer**:
+  - Implemented function to check the user's answer against the game pattern.
+  - Added functionality to handle game over and reset the game variables.
+
+- **Toggle Difficulty Button**:
+  - Implemented a function to toggle the difficulty button state between "Easy" and "Hard".
 
 #### Key Functions
 
