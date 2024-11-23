@@ -141,10 +141,29 @@ function animatePress(currentColor) {
 }
 
 // Function to play audio based on the color or event
+// Function to play audio based on the color or event
 function playAudio(name) {
     var audio = new Audio("sounds/" + name + ".mp3");
+
+    // Constants for mapping difficultyIncrease to playbackRate
+    var maxDifficulty = 500; // Initial difficultyIncrease
+    var minDifficulty = 50; // Minimum difficultyIncrease
+    var minPlaybackRate = 1.0; // Normal playback speed
+    var maxPlaybackRate = 2.5; // Maximum playback speed
+
+    // Calculate playbackRate dynamically based on difficultyIncrease
+    var playbackRate = minPlaybackRate +
+        (maxPlaybackRate - minPlaybackRate) *
+        ((maxDifficulty - difficultyIncrease) / (maxDifficulty - minDifficulty));
+
+    // Ensure playbackRate stays within bounds
+    playbackRate = Math.min(Math.max(playbackRate, minPlaybackRate), maxPlaybackRate);
+
+    audio.playbackRate = playbackRate; // Apply the calculated playback rate
+    audio.currentTime = 0; // Reset to the start
     audio.play();
 }
+
 
 //Function to toggle difficulty button 
 function toggleDifficulty() {
