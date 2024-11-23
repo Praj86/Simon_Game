@@ -7,7 +7,7 @@ Welcome to the **Simon Game**! This web application is an interactive game where
 
 Access the live site here: [Simon Game](https://praj86.github.io/Simon_Game/)
 
-Scan to Play on your phone!:[](QR_image.png)
+![Scan to Play on your phone!:](QR_image.png)
 
 
 ## Features
