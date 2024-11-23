@@ -34,7 +34,7 @@ $('#start-btn').on('click', function(event) {
             $('#currentScore').text(`Current Score: ${currentScore}`);
             $("h1").text("Level " + level);
             nextSequence();
-        }, 700);
+        }, 2000);
         started = true;
     }
 });
