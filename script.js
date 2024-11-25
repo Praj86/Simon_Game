@@ -151,15 +151,15 @@ function playAudio(name) {
     var minPlaybackRate = 1.0; // Normal playback speed
     var maxPlaybackRate = 2.5; // Maximum playback speed
 
-    // Calculate playbackRate dynamically based on difficultyIncrease
+    // Calculating playbackRate dynamically based on difficultyIncrease
     var playbackRate = minPlaybackRate +
         (maxPlaybackRate - minPlaybackRate) *
         ((maxDifficulty - difficultyIncrease) / (maxDifficulty - minDifficulty));
 
-    // Ensure playbackRate stays within bounds
+    // ensuring playbackRate stays within bounds
     playbackRate = Math.min(Math.max(playbackRate, minPlaybackRate), maxPlaybackRate);
 
-    audio.playbackRate = playbackRate; // Apply the calculated playback rate
+    audio.playbackRate = playbackRate; // Appling the calculated playback rate
     audio.currentTime = 0; // Reset to the start
     audio.play();
 }
